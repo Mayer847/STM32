@@ -34,34 +34,34 @@ $(wildcard ../makefile.init) \
 $(wildcard ../makefile.targets) \
 
 
-BUILD_ARTIFACT_NAME := Rotatry_encoder
+BUILD_ARTIFACT_NAME := STM32
 BUILD_ARTIFACT_EXTENSION := elf
 BUILD_ARTIFACT_PREFIX :=
 BUILD_ARTIFACT := $(BUILD_ARTIFACT_PREFIX)$(BUILD_ARTIFACT_NAME)$(if $(BUILD_ARTIFACT_EXTENSION),.$(BUILD_ARTIFACT_EXTENSION),)
 
 # Add inputs and outputs from these tool invocations to the build variables 
 EXECUTABLES += \
-Rotatry_encoder.elf \
+STM32.elf \
 
 MAP_FILES += \
-Rotatry_encoder.map \
+STM32.map \
 
 SIZE_OUTPUT += \
 default.size.stdout \
 
 OBJDUMP_LIST += \
-Rotatry_encoder.list \
+STM32.list \
 
 
 # All Target
 all: main-build
 
 # Main-build Target
-main-build: Rotatry_encoder.elf secondary-outputs
+main-build: STM32.elf secondary-outputs
 
 # Tool invocations
-Rotatry_encoder.elf Rotatry_encoder.map: $(OBJS) $(USER_OBJS) C:\Users\mmaximus\STM32CubeIDE\workspace_1.13.2\Rotatry_encoder\STM32F401RCTX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-gcc -o "Rotatry_encoder.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"C:\Users\mmaximus\STM32CubeIDE\workspace_1.13.2\Rotatry_encoder\STM32F401RCTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Rotatry_encoder.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+STM32.elf STM32.map: $(OBJS) $(USER_OBJS) C:\Users\mmaximus\Git_projects\STM32\STM32F401RCTX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-gcc -o "STM32.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"C:\Users\mmaximus\Git_projects\STM32\STM32F401RCTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="STM32.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 
@@ -70,14 +70,14 @@ default.size.stdout: $(EXECUTABLES) makefile objects.list $(OPTIONAL_TOOL_DEPS)
 	@echo 'Finished building: $@'
 	@echo ' '
 
-Rotatry_encoder.list: $(EXECUTABLES) makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-objdump -h -S $(EXECUTABLES) > "Rotatry_encoder.list"
+STM32.list: $(EXECUTABLES) makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-objdump -h -S $(EXECUTABLES) > "STM32.list"
 	@echo 'Finished building: $@'
 	@echo ' '
 
 # Other Targets
 clean:
-	-$(RM) Rotatry_encoder.elf Rotatry_encoder.list Rotatry_encoder.map default.size.stdout
+	-$(RM) STM32.elf STM32.list STM32.map default.size.stdout
 	-@echo ' '
 
 secondary-outputs: $(SIZE_OUTPUT) $(OBJDUMP_LIST)
